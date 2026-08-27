@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "PySaxPower"
+version = "1.0.0"
+description = "Package for reading Sax devices via modbus"
+readme = "README.md"
+requires-python = ">=3.7"
+license = "MIT"
+authors = [
+    {name = "Hannes", email = "hannes.210@gmx.de"}
+]
+dependencies = [
+    "pymodbus==2.5"
+]
+
+[project.urls]
+Homepage = "https://github.com/Hans-4/pysaxpower"
