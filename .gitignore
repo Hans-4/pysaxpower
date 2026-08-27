@@ -1,2 +1,11 @@
 .idea
 .venv
+
+# Build- und Paketierungsordner
+build/
+dist/
+*.egg-info/
+
+# Python-Cache
+__pycache__/
+*.pyc
