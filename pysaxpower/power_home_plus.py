@@ -13,7 +13,7 @@ class PowerHomePlus:
             timeout=timeout
         )
 
-        self.client.connect()
+        self.connect()
 
     @staticmethod
     def apply_offset(value: int):
@@ -44,6 +44,9 @@ class PowerHomePlus:
                 results.append(None)
 
         return results
+
+    def connect(self):
+        self.client.connect()
 
     def close(self):
         self.client.close()
