@@ -20,6 +20,9 @@ class PowerHomePlus:
         offset = 16384
         return value - offset
 
+    def write_register(self, value):
+        self.client.write_register(address=41, value=value, device_id=64)
+
     def read_register(self):
         """
         46: battery charge level
@@ -34,16 +37,32 @@ class PowerHomePlus:
             value = self.client.read_holding_registers(address=addresses[i], count=1, device_id=64)
 
             if not value.isError():
-                if i > 0:
-                    decoded_value = self.apply_offset(value.registers[0])
-                    results.append(decoded_value)
-                else:
-                    results.append(value.registers[0])
+                decoded_value = value.registers[0]
+                results.append(decoded_value)
             else:
                 print(f"Error reading register {addresses[i]} from Sax Power Home Plus Battery")
                 results.append(None)
 
         return results
+
+    def get_raw_values(self):
+        values = self.read_register()
+        return values
+
+    def get_formatted_values(self):
+        values = self.read_register()
+
+        formatted_values = []
+
+        for value in values:
+            if value > 100:
+                formatted_value = self.apply_offset(value)
+                formatted_values.append(formatted_value)
+            else:
+                formatted_values.append(value)
+
+        return formatted_values
+
 
     def connect(self):
         self.client.connect()
