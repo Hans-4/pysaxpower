@@ -1,4 +1,4 @@
-from pymodbus.client.sync import ModbusTcpClient
+from pymodbus.client import ModbusTcpClient
 
 class PowerHomePlus:
     def __init__(
@@ -12,6 +12,8 @@ class PowerHomePlus:
             port=port,
             timeout=timeout
         )
+
+        self.client.connect()
 
     @staticmethod
     def apply_offset(value: int):
@@ -29,7 +31,7 @@ class PowerHomePlus:
         results = []
 
         for i in range(len(addresses)):
-            value = self.client.read_holding_registers(address=addresses[i], count=1, unit=64)
+            value = self.client.read_holding_registers(address=addresses[i], count=1, device_id=64)
 
             if not value.isError():
                 if i > 0:
