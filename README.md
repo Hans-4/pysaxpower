@@ -33,7 +33,7 @@ pip install PySaxPower
 ## Usage
 
 ```python
-from sax_power.power_home_plus import PowerHomePlus
+from pysaxpower import PowerHomePlus
 
 device = PowerHomePlus("192.168.178.60")
 
