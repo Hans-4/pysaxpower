@@ -138,11 +138,11 @@ class SunSpecRegister(object):
     #--------------------------------------
     # Active Power (Grid)
     #--------------------------------------
-    SumActiveGridPower              = 40072
-    ActivePower_Grid_L1             = 40073
-    ActivePower_Grid_L2             = 40074
-    ActivePower_Grid_L3             = 40075
-    ActiveGridPowerScalefactor      = 40076
+    ActiveGridPower             = 40072
+    ActiveGridPower_L1          = 40073
+    ActiveGridPower_L2          = 40074
+    ActiveGridPower_L3          = 40075
+    ActiveGridPower_Scalefactor = 40076
 
     #--------------------------------------
     # Apparent Power (Grid)
