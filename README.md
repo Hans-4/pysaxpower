@@ -41,6 +41,8 @@ pip install PySaxPower
 
 ## Usage
 
+See the Sunspec docs [here](https://github.com/user-attachments/files/31700621/Modbus._Sunspec_Dokumentation.pdf).
+
 ### Sunspec
 
 #### Read register
