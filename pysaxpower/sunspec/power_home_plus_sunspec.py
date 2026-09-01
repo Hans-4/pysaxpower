@@ -2,7 +2,7 @@ from pymodbus.client import ModbusTcpClient
 from pysaxpower.sunspec.register import SunSpecRegister
 from pysaxpower.sunspec.scalefactors import SunSpecScaleFactors
 
-class PowerHomePlus:
+class PowerHomePlusSunspec:
     def __init__(
         self,
         ip: str,
@@ -69,12 +69,10 @@ class PowerHomePlus:
         formatted_values = {}
         for name, register in registers.items():
 
-            int16_value = self.client.read_holding_registers(
+            int16_register_value = self.client.read_holding_registers(
                 register, count=1, device_id=100
             )
-            value = self.encode_int16(
-                int16_value.registers[0]
-            )
+            int_16_value = int16_register_value.registers[0]
 
             scale_factor_register = self.scalefactor.search_scale_factor(
                 register
@@ -87,11 +85,16 @@ class PowerHomePlus:
 
                 formatted_scale_factor = self.encode_int16(scale_factor.registers[0])
 
-                formatted_value = (value * 10 ** (formatted_scale_factor))
-                formatted_values[name] = formatted_value
+                formatted_value = (int_16_value * 10 ** (formatted_scale_factor))
 
             else:
-                formatted_values[name] = value
+                formatted_value = int_16_value
+
+            value = self.encode_int16(
+                formatted_value
+            )
+
+            formatted_values[name] = value
 
         return formatted_values
 
