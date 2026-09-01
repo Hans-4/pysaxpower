@@ -1,6 +1,6 @@
 # PySaxPower
 
-**A Python package to read and write data from/to SAX Power Home Plus batteries.**
+**Python package to read and write data from/to SAX Power Home Plus batteries.**
 
 ---
 
