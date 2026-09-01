@@ -1,2 +1,5 @@
 from pysaxpower.sunspec.power_home_plus_sunspec import PowerHomePlusSunspec
 from pysaxpower.sunspec.register import SunSpecRegister
+
+from pysaxpower.basic_protocol.power_home_plus_basic import PowerHomePlusBasic
+from pysaxpower.basic_protocol.basic_register import BasicRegister
