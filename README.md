@@ -10,13 +10,14 @@ Here’s a more polished and concise version of your text with improved clarity,
 
 ---
 
-With **PySaxPower**, you can read Modbus registers from **SAX Power Home Plus** batteries. The package is divided into two protocol implementations: **SunSpec** and **Basic**. The **Basic** protocol supports read-only operations.
+With **PySaxPower**, you can read Modbus registers from **SAX Power Home Plus** batteries. 
+The package is divided into two protocol implementations: **SunSpec** and **Basic**. 
+The **Basic** protocol supports read-only operations. 
+View the [Manual](https://sax-power.net/download/Handbuch_SAX_Home_Plus_7,7_EN.pdf) for more information.
 
 > **Note:**
 > Due to a firmware bug in SAX devices, **only the SunSpec protocol supports writing to registers**.
 > To use this feature, ensure your battery has at least **Master V61** and **Gateway V54** firmware versions. If not, you may need to update your firmware or contact **Customer Support**.
-
----
 
 ---
 
@@ -39,6 +40,8 @@ pip install PySaxPower
 ---
 
 ## Usage
+
+See the Sunspec docs [here](https://github.com/user-attachments/files/31700621/Modbus._Sunspec_Dokumentation.pdf).
 
 ### Sunspec
 
@@ -75,6 +78,8 @@ write_values = {
 
 device.write_registers(write_values)
 ```
+
+---
 
 ### Basic
 ```python
