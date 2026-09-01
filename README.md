@@ -32,12 +32,36 @@ pip install PySaxPower
 
 ## Usage
 
+### Read register
 ```python
-from pysaxpower import PowerHomePlus
+from pysaxpower import PowerHomePlusSunspec
+from pysaxpower import SunSpecRegister
 
-device = PowerHomePlus("192.168.178.60")
+device = PowerHomePlusSunspec("192.168.178.60")
 
-level, power, grid_power = device.read_register()
+register = SunSpecRegister()
 
-print(f"Battery Level: {level}% | Power: {power}W | Grid Power: {grid_power}W")
+read_values = {
+    "Soc": register.CurrentSoC,
+    "Battery Power": register.ActivePower_Storage_Sum,
+    "Grid Power": register.ActiveGridPower,
+}
+
+values = device.get_formatted_values(read_values)
+```
+
+### Write register
+```python
+from pysaxpower import PowerHomePlusSunspec
+from pysaxpower import SunSpecRegister
+
+device = PowerHomePlusSunspec("192.168.178.60")
+
+register = SunSpecRegister()
+
+write_values = {
+    register.ControlMode: 1
+}
+
+device.write_registers(write_values)
 ```
