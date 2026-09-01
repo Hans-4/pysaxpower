@@ -1,14 +1,22 @@
 # PySaxPower
 
-**A Python package for reading data from SAX Power Home Plus batteries.**
+**A Python package to read and write data from/to SAX Power Home Plus batteries.**
 
 ---
 
 ## Overview
 
-With `PySaxPower` you can read the modbus register from the SAX Power Home Plus batteries.
+Here’s a more polished and concise version of your text with improved clarity, flow, and grammar:
 
-> **Note:** Due to a firmware bug in SAX devices, **writing data to the battery is currently unsupported**. This limitation will be addressed in a future update once SAX resolves the issue. For more details, see the [EVCC GitHub discussion](https://github.com/evcc-io/evcc/discussions/22155).
+---
+
+With **PySaxPower**, you can read Modbus registers from **SAX Power Home Plus** batteries. The package is divided into two protocol implementations: **SunSpec** and **Basic**. The **Basic** protocol supports read-only operations.
+
+> **Note:**
+> Due to a firmware bug in SAX devices, **only the SunSpec protocol supports writing to registers**.
+> To use this feature, ensure your battery has at least **Master V61** and **Gateway V54** firmware versions. If not, you may need to update your firmware or contact **Customer Support**.
+
+---
 
 ---
 
@@ -32,7 +40,9 @@ pip install PySaxPower
 
 ## Usage
 
-### Read register
+### Sunspec
+
+#### Read register
 ```python
 from pysaxpower import PowerHomePlusSunspec
 from pysaxpower import SunSpecRegister
@@ -50,7 +60,7 @@ read_values = {
 values = device.get_formatted_values(read_values)
 ```
 
-### Write register
+#### Write register
 ```python
 from pysaxpower import PowerHomePlusSunspec
 from pysaxpower import SunSpecRegister
@@ -64,4 +74,26 @@ write_values = {
 }
 
 device.write_registers(write_values)
+```
+
+### Basic
+```python
+from pysaxpower import PowerHomePlusBasic
+from pysaxpower import BasicRegister
+
+device = PowerHomePlusBasic("192.168.178.60")
+
+register = BasicRegister
+
+read_values = {
+    "Operating Mode": register.OperatingMode,
+    "Soc": register.SOC,
+    "Battery Power": register.ActivePower,
+    "Grid Power": register.GridPower,
+}
+
+values = device.get_values(read_values)
+print(values)
+
+device.close()
 ```
