@@ -6,10 +6,6 @@
 
 ## Overview
 
-Here’s a more polished and concise version of your text with improved clarity, flow, and grammar:
-
----
-
 With **PySaxPower**, you can read Modbus registers from **SAX Power Home Plus** batteries. 
 The package is divided into two protocol implementations: **SunSpec** and **Basic**. 
 The **Basic** protocol supports read-only operations. 
