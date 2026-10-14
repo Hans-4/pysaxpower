@@ -11,10 +11,13 @@ The package is divided into two protocol implementations: **SunSpec** and **Basi
 The **Basic** protocol supports read-only operations. 
 View the [manual](https://sax-power.net/download/Handbuch_SAX_Home_Plus_7,7_EN.pdf) for more informations.
 
-> **Note:**
-> Due to a firmware error in SAX devices, only the SunSpec protocol supports writing to registers.
-> To use this function, please ensure that at least firmware versions `Master V61` and `Gateway V54`, are installed on your battery. If this is not the case, you will need to update your firmware.
-> You have to contact the customer support for this.
+> [!Caution]
+Due to a firmware error in SAX devices, only the SunSpec protocol supports writing to registers.
+To use this function, please ensure that at least firmware versions `Master V61` and `Gateway V54` are installed on your battery.
+If this is not the case, you will need to update your firmware.
+You will need to contact the [customer support](https://sax-power.net/en/contact/customer-service/) for this.  
+Also, by default, the battery regulates the power very slowly (about 100 W every 5 seconds).
+In most cases, I would recommend asking the support to decrease the reaction time.
 
 ---
 
