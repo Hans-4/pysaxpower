@@ -10,8 +10,6 @@ Registers:
   GridPower: Grid power (W)
 """
 
-device = PowerHomePlusBasic("192.168.178.60") #Enter your ip
-
 register = BasicRegister
 
 read_values = {
@@ -20,7 +18,9 @@ read_values = {
     "Grid Power": register.GridPower,
 }
 
-values = device.get_values(read_values)
-print(values)
+with PowerHomePlusBasic("192.168.178.60") as device:
 
-device.close()
+    values = device.get_values(read_values)
+    print(values)
+
+    device.close()

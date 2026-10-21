@@ -7,8 +7,6 @@ from pysaxpower import PowerHomePlusSunspec, SunSpecRegister
 SunSpec: Read SoC/Power values, write ControlMode (1) and PowerTarget (10%).
 """
 
-device = PowerHomePlusSunspec("192.168.178.60") #Enter your ip
-
 register = SunSpecRegister()
 
 read_values = {
@@ -17,16 +15,20 @@ read_values = {
     "Grid Power": register.ActiveGridPower,
 }
 
-try:
-    device.write_registers({register.ControlMode: 1}) #Set battery in control mode
-    while True:
-        values = device.get_formatted_values(read_values)
+with PowerHomePlusSunspec("192.168.178.60") as device:
+    print(device)
+    values = device.get_formatted_values(read_values)
 
-        print(values)
+    try:
+        device.write_registers({register.ControlMode: 1}) #Set battery in control mode
+        while True:
+            values = device.get_formatted_values(read_values)
 
-        device.write_registers({register.PowerTarget: 10}) #Power target 10% of reference power
+            print(values)
 
-        time.sleep(0.5)
+            device.write_registers({register.PowerTarget: 10}) #Power target 10% of reference power
 
-except KeyboardInterrupt:
-    device.close()
+            time.sleep(0.5)
+
+    except KeyboardInterrupt:
+        device.close()
