@@ -15,6 +15,13 @@ class PowerHomePlusBasic:
 
         self.connect()
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close()
+        return False
+
     @staticmethod
     def apply_offset(value: int):
         offset = 16384
@@ -34,8 +41,8 @@ class PowerHomePlusBasic:
                 else:
                     results[name] = raw_value.registers[0]
             else:
-                print(f"Error reading {name}: {value} from Sax Power Home Plus Battery")
                 results[name] = None
+                raise ConnectionError(f"Error reading {name}: {value} from Sax Power Home Plus Battery")
 
         return results
 
@@ -51,6 +58,8 @@ class PowerHomePlusBasic:
             else:
                 print(f"Error reading {name}: {value} from Sax Power Home Plus Battery")
                 results[name] = None
+
+                raise ConnectionError(f'Error reading {name}: {value}')
 
         return results
 
