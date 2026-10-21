@@ -20,6 +20,12 @@ class PowerHomePlusSunspec:
 
         self.connect()
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close()
+        return False
 
     def write_registers(self, values: dict[int, int | float]):
 
@@ -57,7 +63,7 @@ class PowerHomePlusSunspec:
             raw_values = self.client.read_holding_registers(register, count=1, device_id=100)
 
             if raw_values.isError():
-                pass
+                raise ConnectionError(f'Failed to read register {name}: {register}')
             else:
                 values[name] = raw_values.registers[0]
 
@@ -72,6 +78,8 @@ class PowerHomePlusSunspec:
             int16_register_value = self.client.read_holding_registers(
                 register, count=1, device_id=100
             )
+            if int16_register_value.isError():
+                raise ConnectionError(f'Failed to read register {name}: {register}')
             int_16_value = int16_register_value.registers[0]
 
             scale_factor_register = self.scalefactor.search_scale_factor(
@@ -82,6 +90,8 @@ class PowerHomePlusSunspec:
                 scale_factor = self.client.read_holding_registers(
                     scale_factor_register, count=1, device_id=100
                 )
+                if scale_factor.isError():
+                    raise ConnectionError(f'Failed to read scale factor for register {name}: {register}')
 
                 formatted_scale_factor = self.encode_int16(scale_factor.registers[0])
 
